@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"
+      integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
+        integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
+        crossorigin="anonymous"></script>
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <!-- Draggable -->
+    <script src="https://www.itxst.com/package/sortable/sortable.min.js"></script>
+    <!-- CSS-->
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <header class="header">
+    </header>
+    <div class="wrap classTitleWrap">
+        <div class="content nav_wrap">
+            <a href="./index.html" class="nav_item">返回上一頁</a>
+        </div>
+        <div class="wrap index_content">
+            <div class="content">
+                <p class="classTitle">14 holidays-首頁</p>
+                <div class="">
+                    <ul class="flex">
+                        <li class="nav_item w100px" @click="tabs = 0" :class="{websiteActive:tabs==0}">排序</li>
+                        <li class="nav_item w100px" @click="tabs = 1" :class="{websiteActive:tabs==1}">編輯</li>
+                    </ul> 
+                    <div class="restaurant_list mt-20"> 
+                    <!--------------------分類排序-------------------->
+                        <div v-show="tabs == 0">
+                            <p class="classTabssubTitle">分類排序</p>
+                            <p class="classTabssubTitleInfo">輸入序號或拖曳分類名稱進行排序</p>
+                            <ul class="inner">
+                                <li class="restaurant_list_item restaurant_list_item_title">
+                                    <span class="classNum">序號</span>
+                                    <span class="className">分類名稱</span>
+                                </li>
+                                <ul class="inner" ref="sortable">
+                                    <li class="restaurant_list_item"  v-for="(li,index) in classTitle" :key="li.id" :data-id="li.id"> 
+                                        <span class="classNum move">
+                                            <span class="numBox"> {{li.index+1}}</span>
+                                        </span>
+                                        <span class="className">{{li.name}}</span>
+                                    </li>
+                                </ul>
+                            </ul>
+                        </div>
+                        <!--------------------分類編輯-------------------->
+                        <div v-show="tabs == 1">
+                            <p class="classTabssubTitle">分類編輯</p>
+                            <p class="classTabssubTitleInfo">點擊按enter後即可更改分類名稱</p>                            
+                            <ul class="inner">
+                                <li class="restaurant_list_item restaurant_list_item_title">
+                                    <span class="classNum">序號</span>
+                                    <span class="className">分類名稱</span>
+                                </li>
+                                <ul class="inner">
+                                    <li class="restaurant_list_item"  v-for="(li,index) in classTitleEdit" :key="li.id" :data-id="li.id" @dblclick="editTodo(li)"> 
+                                        <span class="classNum">
+                                            {{li.index+1}}
+                                        </span>
+                                        <span v-if="li.id !== cache.id" class="className">{{li.name}}</span>
+                                        <input type="text" class="form-control" v-if="li.id == cache.id" v-model="cacheTitle" @keyup.enter="doneEdit(li)" >
+                                    </li>
+                                </ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--------------------root-------------------->
+    </div>
+
+
+    <footer class="footer"></footer>
+
+    <script>
+        new Vue({
+            el: ".classTitleWrap",
+            data() {
+                return {
+                    cache: {}, //編輯存放區
+                    cacheTitle: '' ,//編輯標題存放區
+                    tabs:0,
+                    classTitle:[
+                        {id:'0',name:'台北防疫旅館首選',index:0},
+                        {id:'1',name:'台中防疫旅館首選',index:1},
+                        {id:'2',name:'高雄防疫旅館首選',index:2},
+                    ],
+                    classTitleEdit:[
+                        {id:'0',name:'台北防疫旅館首選',index:0},
+                        {id:'1',name:'台中防疫旅館首選',index:1},
+                        {id:'2',name:'高雄防疫旅館首選',index:2},
+                    ]
+                }
+            },
+            mounted(){
+                Sortable.create(this.$refs.sortable,{
+                    handle: ".move",
+                    animation: 1000,
+                    onUpdate: this.sorted,
+                })
+            },
+            methods: {
+                sorted(evt) {
+                    const orderList = []
+                    const children = this.$refs.sortable.children;
+                    for(let i=0;i<children.length;i++){
+                        const ch = children[i]
+                        const id = ch.getAttribute("data-id")
+                        this.classTitle.find(li => li.id === id).index = i
+                    }
+                },
+                editTodo(li) {
+                    this.cache = li;
+                    this.cacheTitle = li.name;
+                },
+                doneEdit(li) {
+                    li.name = this.cacheTitle;
+                    this.cacheTitle = '';
+                    this.cache = {};
+                }
+            },
+        })
+    </script>
+</body>
+</html>

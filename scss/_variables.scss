@@ -1,0 +1,19 @@
+$xxxl-bp: "only screen and (max-width: 1920px)"; //含1920 以上
+$xxl-bp: "only screen and (max-width: 1440px)"; //含1440 以下
+$xl-bp: "only screen and (max-width: 1265px)";
+$lg-bpUp: "only screen and (min-width: 992px)";
+$lg-bp: "only screen and (max-width: 992px)";
+$md-bp: "only screen and (max-width: 767px)";
+$sm-bp: "only screen and (max-width: 576px)";
+$xs-bp: "only screen and (max-width: 360px)";
+
+.form-check-input:checked{
+    background-color: #1983CF;
+    border-color:#1983CF;
+}
+
+.form-check-input:focus{
+    box-shadow:none;
+}
+
+

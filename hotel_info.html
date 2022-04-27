@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"
+      integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
+        integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
+        crossorigin="anonymous"></script>
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <!-- Draggable -->
+    <script src="https://www.itxst.com/package/sortable/sortable.min.js"></script>
+    <!-- alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- CSS-->
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <header class="header">
+    </header>
+    <form action="">
+        <div class="wrap hotelInfoWrap">
+            <div class="content nav_wrap">
+                <a href="./index.html" class="nav_item">返回上一頁</a>
+            </div>
+            <div class="wrap index_content">
+                <div class="content">
+                    <p class="classTitle">編輯內容</p>
+                    <div class="">
+                        <ul class="flex">
+                            <li class="nav_item w100px" @click="hotelInfoTabs = 0" :class="{websiteActive:hotelInfoTabs==0}">飯店資訊</li>
+                            <li class="nav_item w100px" @click="hotelInfoTabs = 1" :class="{websiteActive:hotelInfoTabs==1}">房型列表</li>
+                        </ul> 
+                        <div class="restaurant_list mt-20"> 
+                        <!--------------------分類排序-------------------->
+                            <div v-show="hotelInfoTabs == 0">
+                                <ul class="inner hotelInfoEditList">
+                                    <li class="inner hotelInfoEditItem">
+                                        <span class="hotelInfoEditTitle">飯店名稱</span>
+                                        <span class="hotelInfoEditMain">
+                                            <input type="text" class="form-control" placeholder="請輸入分類標題名稱，最多二十個字" maxlength="20"  @input="hotelNameInput" v-model="hotelName">
+                                            <span class="hotelInfoEditMainTextNum">{{hotelNameMax}}/20</span>
+                                        </span>
+                                    </li>
+                                    <li class="inner hotelInfoEditItem">
+                                        <span class="hotelInfoEditTitle">飯店價格</span>
+                                        <span class="hotelInfoEditMain">
+                                            每晚&emsp;
+                                            <div class="input-group wax-220">
+                                                <span class="input-group-text">NT$</span>
+                                                <input type="text" class="form-control" placeholder="3500">
+                                            </div>         
+                                            &emsp;起                               
+                                        </span>
+                                    </li>
+                                    <li class="inner hotelInfoEditItem">
+                                        <span class="hotelInfoEditTitle">價格描述</span>
+                                        <span class="hotelInfoEditMain">
+                                            <textarea class="form-control" placeholder="房費包含 : 每日三餐、居家檢疫期間 15 天份量之房內備品、服務稅及稅額。" maxlength="50"  @input="hotelPriceDescInput" v-model="hotelPriceDesc"></textarea>
+                                            <span class="hotelInfoEditMainTextNum">{{hotelPriceDescMax}}/50</span>
+                                        </span>
+                                    </li>
+                                    <li class="inner hotelInfoEditItem">
+                                        <span class="hotelInfoEditTitle">封面照片</span>
+                                        <span class="hotelInfoEditMain">
+                                            <div class="imgWrap">
+                                                <div v-if="preview===null || preview===''" class="imgBox">
+                                                    <input type="file" id="coverImg" accept="image/*" @change="previewImage" class="file" id="my-file">  
+                                                    <label for="coverImg">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#2CA6E0" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                        </svg> 
+                                                    </label>           
+                                                </div>
+                                                <div v-else class="imgBox">
+                                                    <img :src="preview" class="" />
+                                                    <i class="bi bi-x-lg" @click.stop="removepreviewImage()"></i>
+                                                </div>  
+                                            </div>
+                                        </span>
+                                    </li>
+                                    <li class="inner hotelInfoEditItem">
+                                        <span class="hotelInfoEditTitle">詳情照片</span>
+                                        <span class="hotelInfoEditMain">
+                                            <div class="imgWrap">
+                                                <ul class="imgBoxList">
+                                                    <li v-for="item, index in preview_list" :key="index" class="imgBox">
+                                                        <img :src="item" />
+                                                        <i class="bi bi-x-lg" @click.stop="removeImage(index)"></i>
+                                                    </li> 
+                                                </ul>  
+                                                <div class="imgBox">
+                                                    <input type="file" accept="image/*" multiple="multiple" @change="previewMultiImage" id="hoteldetalImg" class="file"> 
+                                                    <label for="hoteldetalImg">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#2CA6E0" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                        </svg> 
+                                                    </label>           
+                                                </div>
+
+                                            </div>
+                                            
+                                        
+                                        </span>
+                                    </li>
+                                    <li class="inner hotelInfoEditItem">
+                                        <span class="hotelInfoEditTitle"></span>
+                                        <span class="hotelInfoEditMain">
+                                            <span class="descBox">
+                                                <span>每間飯店至少應上傳 1 張封面照片，5 張詳情照片</span>
+                                                <span>照片檔案大小限制 10 M</span>
+                                                <span>照片最佳尺寸(3:2) = 1026 X 684 jpg、jpeg</span>
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <li class="inner hotelInfoEditItem">
+                                        <span class="hotelInfoEditTitle">入住須知</span>
+                                        <span class="hotelInfoEditMain">
+                                            <textarea class="form-control bigText" placeholder="" maxlength="500"  @input="pleaseNoteDescInput" v-model="pleaseNoteDesc"></textarea>
+                                            <span class="textNum">{{pleaseNoteDescMax}}/500</span>
+                                        </span>
+                                    </li>
+                                    <li class="inner hotelInfoEditItem">
+                                        <span class="hotelInfoEditTitle">退訂政策</span>
+                                        <span class="hotelInfoEditMain">
+                                            <textarea class="form-control bigText" placeholder="" maxlength="500"  @input="cancelDescInput" v-model="cancelDesc"></textarea>
+                                            <span class="textNum">{{cancelDescMax}}/500</span>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--------------------分類編輯-------------------->
+                            <div v-show="hotelInfoTabs == 1">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!--------------------root-------------------->
+        </div>
+
+
+        <footer class="footer">
+            <div class="content sendArea">
+                <a href="" class="blue_btn">儲存</a>
+                <a href="" class="blueBorder_btn">取消</a>
+            </div>
+        </footer>
+    </form>
+    <script>
+        new Vue({
+            el: ".hotelInfoWrap",
+            data() {
+                return {
+                    hotelInfoTabs:0,
+                    hotelNameMax:20,//新增飯店標題字數限制
+                    hotelName:'',//新增飯店標題
+                    hotelPriceDescMax:50,
+                    hotelPriceDesc:'',
+                    pleaseNoteDesc:'',
+                    pleaseNoteDescMax:500,
+                    cancelDesc:'',
+                    cancelDescMax:500,
+                    preview: null,
+                    image: null,
+                    preview_list: [],
+                    image_list: []
+                }
+            },
+            methods: {
+                //倒計數
+                hotelNameInput(){
+                    var txtVal = this.hotelName.length;
+                    this.hotelNameMax = 20-txtVal;
+                },
+                hotelPriceDescInput(){
+                    var txtVal = this.hotelPriceDesc.length;
+                    this.hotelPriceDescMax = 50-txtVal;
+                },
+                pleaseNoteDescInput(){
+                    var txtVal = this.pleaseNoteDesc.length;
+                    this.pleaseNoteDescMax = 500-txtVal;
+                },
+                cancelDescInput(){
+                    var txtVal = this.cancelDesc.length;
+                    this.cancelDescMax = 500-txtVal;
+                },
+                //上傳圖片
+                previewImage(event) {
+                    var input = event.target;
+                    if (input.files) {
+                    var reader = new FileReader();
+                    reader.onload = (e) => {
+                        this.preview = e.target.result;
+                    }
+                    this.image=input.files[0];
+                    reader.readAsDataURL(input.files[0]);
+                    }
+                },
+                previewMultiImage(event) {
+                    var input = event.target;
+                    var count = input.files.length;
+                    var index = 0;
+                    if(input.files.length + this.preview_list.length > 5){
+                        swal("不能上傳超過五張唷！", {
+                            icon: "warning",
+                            buttons:'了解'
+                        });
+                        return;
+                    }else{
+                        if (input.files) {
+                            while(count --) {
+                                var reader = new FileReader();
+                                reader.onload = (e) => {
+                                    this.preview_list.push(e.target.result);
+                                }
+                                this.image_list.push(input.files[index]);
+                                reader.readAsDataURL(input.files[index]);
+                                index ++;
+                            }
+                        }
+                    }
+                
+            },
+                reset() {
+                    this.image = null;
+                    this.preview = null;
+                    this.image_list = [];
+                    this.preview_list = [];
+                },
+                removepreviewImage(){
+                    swal({
+                        title:"刪除此圖片?",
+                        icon:"warning",
+                        buttons: ["保留", "刪除"],
+                        dangerMode: true,
+                    }).then((willDelete)=>{
+                        if (willDelete) {
+                            this.preview=null;
+                            swal("你已成功刪除", {
+                            icon: "success",
+                            buttons:'完成'
+                        });
+                            document.body.classList.remove('is-open')
+                    }});
+                },
+                removeImage(index){
+                    swal({
+                        title:"刪除",
+                        icon:"warning",
+                        buttons: ["保留", "刪除"],
+                        dangerMode: true,
+                    }).then((willDelete)=>{
+                        if (willDelete) {
+                            this.preview_list.splice(index, 1);
+                            swal("你已成功刪除", {
+                            icon: "success",
+                            buttons:'完成'
+                        });
+                            document.body.classList.remove('is-open')
+                    }});
+                }
+            },
+        })
+    </script>
+</body>
+</html>
+

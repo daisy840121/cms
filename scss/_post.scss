@@ -1,0 +1,140 @@
+.post-title-edit{
+    background-color: #1983CF;
+    margin: 40px 0px 10px;
+    position:relative;
+    input{
+        border: 0;
+        font-size: 24px;
+        width: 100%;
+    &::placeholder{
+        color: #e5e5e5;
+        font-size: 24px;
+        line-height: 28px;
+        font-weight: 500;
+        letter-spacing: 2px;
+    }
+    }
+    i{
+        position: absolute;
+        right: 0px;
+        top:10px;
+    }
+}
+
+.post-date{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #53585C;
+    letter-spacing: 2px;
+}
+
+
+.post-tab-btn{
+    width:150px;
+    padding: 20px 0px;
+    span{
+        display: block;
+        padding-left:10px;
+    }
+}
+.post-tab{
+    display: block;
+    padding: 2px 12px;
+    margin: 0px 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: .25rem;
+    border: 2px solid #1983CF;
+    color: #1983CF;
+    cursor:pointer;
+    &:hover{
+        opacity: 0.7;
+    }
+    span{
+        display: block;
+        padding-right:10px;
+    }
+}
+
+// 
+.post-tab-box{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    border: 1px solid #53585C;
+    margin-bottom: 40px;
+    padding: 10px;
+}
+
+.post-tab-list{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+//已輸入0組,還可輸入20組
+.post-tab-box-text{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.post-tab-box-num{
+    color:#1983CF;
+}
+
+
+.newTodo{
+    @include btn;
+    width: 100%;
+    border: 1px solid #707070;
+}
+
+// footer
+.post-tab-submit{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 40px 0px;
+}
+
+
+//model
+.postSetting_item{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0px;
+    align-items: center;
+}
+
+.postSetting_title{
+    width: 15%;
+    text-align: center;
+}
+
+.postSetting_form_item{
+    width: 60%;
+}
+
+.postSetting_form_btn{
+    width: 25%;
+}
+
+.add_type_wrap{
+    padding: 20px 0px;
+    border-top: 1px solid #e9e9e9;
+    border-bottom: 1px solid #e9e9e9;
+    width: 100%;
+    justify-content: center;
+    .add_type_title{
+        padding-left: 13px;
+    }
+    label{
+        padding: 0px 15px 20px;
+    }
+}
+

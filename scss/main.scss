@@ -1,0 +1,182 @@
+@import "./mixin";
+@import "./variables";
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css");
+@import "./reset";
+@import "./post";
+@import "./post_index_nav";
+@import "./post_index_list";
+@import "./index";
+@import "./alert";
+@import "./addhotelmodal";
+@import "./classTitle";
+@import "./hotel_info";
+
+.title{
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: #212529;
+}
+
+
+.subTitle{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #53585C;
+}
+
+.blue_btn{
+  @include btn;
+  background-color:#1983CF;
+  color: #fff;
+  letter-spacing: 2px;
+  border: 2px solid #1983CF;
+  i{
+      padding-right: 10px;
+  }
+  &:hover{
+      color:#fff;
+      opacity: 0.8;
+  }
+}
+
+
+.blueBorder_btn{
+  margin: 0px 10px;
+  @include btn;
+  display: block;
+  border: 2px solid #1983CF;
+  color: #1983CF;
+  &:hover{
+      border: 2px solid #1983CF;
+      color: #1983CF;
+      opacity: 0.7;
+  }
+}
+
+
+.inner{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 20px 0px;
+}
+
+
+.flex{
+  display: flex;
+}
+
+.between{
+  justify-content: space-between;
+}
+
+.search-area{
+  max-width:320px;
+  .input-group-text{
+    background-color: #fff;
+  }
+}
+
+.dropdown-menu{
+  padding: 0;
+}
+
+.form-control{
+  &::placeholder{
+    color: #B1B1B1;
+  }
+}
+
+.w100px{
+  width: 100px;
+  text-align: center;
+}
+
+.mt-20{
+ margin-top: 20px;
+}
+
+.wax-220{
+  width: 220px;
+}
+
+.hotelInfoEditMainTextNum{
+  position:absolute;
+  padding-left: 5px;
+  right:6px;
+  color: #B1B1B1;
+  display:flex;
+  align-items: center;
+  border-left: 1px solid #B1B1B1;
+  height: 100%;
+}
+.textNum{
+  position:absolute;
+  bottom: 0;
+  right: 10px;
+  color: #B1B1B1;
+}
+.input-group-text{
+  background-color: transparent;
+}
+
+.imgBox{
+  width: 150px;
+  height: 100px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px dashed #B1B1B1;
+  position: relative;
+  label{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  .file{
+    overflow: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;  
+  }
+  svg{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  .bi-x-lg{
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding:0px 3px;
+    border-radius: 50%;
+    background-color: #1983CF;
+    color: #fff;
+  }
+}
+
+.imgWrap{
+  width: 100%;
+}
+.imgBoxList{
+  width: 100%;
+  display: flex;
+  li{
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
+}
+

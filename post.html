@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>   
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <!-- 文字編輯器 -->
+    <script src="//cdn.ckeditor.com/4.18.0/full/ckeditor.js"></script>
+    <!-- CSS-->
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <header class="header"></header>
+    <div class="wrap">
+        <div class="content">
+            <p class="title">發表文章</p>
+            <div class="post-title-edit">
+                <input type="text" placeholder="請輸入文章標題">
+                <i class="bi bi-pencil"></i>
+            </div>
+            <p class="post-date">2022.4.12 14:30</p>
+            <!-- -->
+            <div class="post-tab-btn-wrpa">
+                <div class="post-tab-btn">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="post-tab">
+                        <i class="bi bi-plus-lg"></i>
+                        <span>常用標籤</span>
+                    </a>
+                </div>
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">新增標籤</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" name="" id="" v-model="newTodo" class="newTodo">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn blueBorder_btn" data-bs-dismiss="modal">取消</button>
+                            <button type="button" class="btn blue_btn" @click="addTodo">新增標籤</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+            <form action="">
+                <div class="post-tab-box">
+                    <ul class="post-tab-list">
+                        <li  v-for="(item,key) in todos" :key="item.id" class="post-tab">
+                            <span># {{item.title}}</span>
+                            <i class="bi bi-x-lg" @click="removeTodo(key)"></i>
+                        </li>
+                    </ul> 
+                    <span class="post-tab-box-text">(已輸入<span class="post-tab-box-num">{{this.todos.length}}</span>組,還可輸入<span class="post-tab-box-num">{{20-this.todos.length}}</span>組)</span>
+                </div>
+                <textarea name="post"></textarea>
+                <div class="post-tab-submit">
+                    <a href="" class="blueBorder_btn" data-bs-toggle="modal" data-bs-target="#postSetting"><i class="bi bi-nut"></i>文章設定</a>
+                    <a href="" class="blue_btn">發布文章</a>
+                </div>
+                <div class="modal fade" id="postSetting" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">文章設定</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        <ul class="postSetting_list">
+                            <li class="postSetting_item">
+                                <span class="postSetting_title">文章網址</span>
+                                <span class="postSetting_form_item"><input type="text" class="form-control" placeholder="www.com.tw" ></span>
+                                <span class="postSetting_form_btn"><button type="button" class="btn blueBorder_btn">編輯</button></span>
+                            </li>
+                            <li class="postSetting_item">
+                                <span class="postSetting_title">個人分類</span>
+                                <span class="postSetting_form_item">
+                                    <select class="form-select">
+                                        <option value="" selected>未分類</option>
+                                        <option value="">分類一</option>
+                                    </select>
+                                </span>
+                                <span class="postSetting_form_btn"><button type="button" class="btn blueBorder_btn" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">新增</button></span>
+                            </li>
+                            <li class="postSetting_item collapse" id="collapseExample">
+
+                                    <div class="add_type_wrap">
+                                    
+                                            <div class="add_type_title">
+                                                <label for="typeRadio" @click="target = 0">
+                                                    <input type="radio" name="type" id="type" checked>
+                                                    <span>分類</span>
+                                                </label>
+                                                <label for="folder" @click="target = 1">
+                                                    <input type="radio" name="type" id="folder">
+                                                    <span>資料夾</span>
+                                                </label>
+                                            </div>
+                                            <div class="add_type_content">
+                               
+                                                    <ul v-show="target == 0" class="add_type_content_ul">
+                                                        <li class="postSetting_item">
+                                                            <span class="postSetting_title">分類名稱</span>
+                                                            <span class="postSetting_form_item">
+                                                                <input type="text" class="form-control" placeholder="請輸入分類名稱" >
+                                                            </span>
+                                                        </li>
+                                                        <li class="postSetting_item">
+                                                            <span class="postSetting_title">所屬資料夾</span>
+                                                            <span class="postSetting_form_item">
+                                                                <select class="form-select">
+                                                                    <option value="" selected>未分類</option>
+                                                                    <option value="">分類一</option>
+                                                                </select>
+                                                            </span>
+                                                        </li>
+                                                        <li class="postSetting_item">
+                                                            <span class="postSetting_title"></span>
+                                                            <span class="postSetting_form_item"></span>
+                                                            <span class="postSetting_form_btn"><button type="button" class="btn blueBorder_btn ">新增分類</button></span>
+                                                        </li>
+                                                    </ul>
+                                    
+                                                    <ul v-show="target == 1">
+                                                        <li class="postSetting_item">
+                                                            <span class="postSetting_title">資料夾名稱</span>
+                                                            <span class="postSetting_form_item">
+                                                                <input type="text" class="form-control" placeholder="請輸入分類資料夾名稱" >
+                                                            </span>
+                                                        </li>
+                                                        <li class="postSetting_item ">
+                                                            <span class="postSetting_title"></span>
+                                                            <span class="postSetting_form_item"></span>
+                                                            <span class="postSetting_form_btn"><button type="button" class="btn blueBorder_btn ">新增資料夾分類</button></span>
+                                                        </li>
+                                                    </ul>
+                                            </div>
+                                    </div>
+                          
+                            </li>
+                            <li class="postSetting_item">
+                                <span class="postSetting_title">全站分類</span>
+                                <span class="postSetting_form_item">
+                                    <select class="form-select">
+                                        <option value="" selected>未分類</option>
+                                        <option value="">分類一</option>
+                                    </select>
+                                </span>
+                            </li>
+                            <li class="postSetting_item">
+                                <span class="postSetting_title">閱讀權限</span>
+                                <span class="postSetting_form_item">
+                                    <select class="form-select">
+                                        <option value="" selected>公開</option>
+                                        <option value="">隱藏</option>
+                                    </select>
+                                </span>
+                            </li>
+                            <li class="postSetting_item">
+                                <span class="postSetting_title">是否置頂</span>
+                                <span class="postSetting_form_item">
+                                    <select class="form-select">
+                                        <option value="" selected>置頂</option>
+                                        <option value="">不置頂</option>
+                                    </select>
+                                </span>
+                            </li>
+                            <li class="postSetting_item">
+                                <span class="postSetting_title">留言權限</span>
+                                <span class="postSetting_form_item">
+                                    <select class="form-select">
+                                        <option value="" selected>公開</option>
+                                        <option value="">不公開</option>
+                                    </select>
+                                </span>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn blueBorder_btn" data-bs-dismiss="modal">取消</button>
+                            <button type="button" class="btn blue_btn">確認</button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer class="footer"></footer>
+    
+    <script>
+        //tabs
+        new Vue({
+            el: ".content",
+            data() {
+                return {
+                target:0,
+                newTodo: '', //讀取input資料
+                todos: [{
+                    id:'01',
+                    title:'防疫旅館',
+                }], //存放資料列表
+                }
+            },
+            methods: {
+                addTodo() {
+                    var value = this.newTodo.trim();
+                    var time = Math.floor(Date.now());
+                    if (!value) {
+                        return;
+                    } //資料為空無法執行
+                    this.todos.push({
+                        id: time,
+                        title: value,
+                    });
+                    this.newTodo = ''; //push完清空
+                    },
+                removeTodo(key) {
+                    this.todos.splice(key, 1)
+                },
+            },
+        })
+        // 文字編輯器
+        CKEDITOR.replace('post',{
+            // language: 'es',
+            uiColor: '#F0F9FF',
+            editorplaceholder: '請輸入文章內容....',
+            height:600,
+            toolbar:[
+            { name: 'document', items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
+            { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+            { name: 'editing', items : [ 'Find','-','SelectAll' ]},
+            { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike']},
+            '/',
+            { name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote',
+            '-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock' ] },
+            { name: 'links', items : [ 'Link','Unlink' ] },
+            { name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe' ] },
+            '/',
+            { name: 'styles', items : [ 'Styles','Format','Font','FontSize' ] },
+            { name: 'colors', items : [ 'TextColor','BGColor' ] },
+            ]
+            // removeButtons:
+        });
+    </script>
+</body>
+</html>

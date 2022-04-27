@@ -1,0 +1,39 @@
+
+.hotelInfoEditTitle{
+    width: 10%;
+    font-weight: 500;
+}
+
+.hotelInfoEditMain{
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
+
+.hotelInfoEditMain{
+    position:relative;
+}
+
+.descBox{
+    width: 100%;
+    padding: 16px;
+    background-color: #F2F2F2;
+    span{
+        display: block;
+    }
+}
+
+.bigText{
+    height: 230px;
+}
+
+.sendArea{
+    height: 100px;
+    display: flex;
+    align-items: center;
+    a{
+        width: 160px;
+        display: flex;
+        justify-content: center;
+    }
+}

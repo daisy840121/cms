@@ -1,0 +1,171 @@
+.post_index_wrap{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 20px 20px 40px;
+}
+.post_nav{
+    width: 25%;
+    padding-right: 50px;
+}
+
+.post_list_wrap{
+    width: 75%;
+}
+
+.post_nav_list{
+    width: 100%;
+    padding:20px 0px;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+.post_nav_item{
+    padding: 15px 0px;
+    position: relative;
+
+    a{
+        color:#53585C;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        &:hover{
+            color:#1983CF;
+        }
+        &::after{
+            content: '';
+            position: absolute;
+            left: -10px;
+            top:12px;
+            width:4px;
+            height: 30px;
+            background-color:#1983CF;
+            opacity: 0;
+        }
+        &:hover::after{
+            opacity: 1;
+        }
+    }
+    
+}
+
+.post_nav_item_num{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #e9e9e9;
+    color:#53585C80;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.folder{
+    padding-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.folder-btn,.folder-edit-btn{
+    margin: 0px 5px;
+    @include btn;
+    border: 1px solid #53585C;
+    color:#53585C;
+    &:hover{
+       color:#232b3280;
+       border: 1px solid #53585C80;
+    }
+}
+
+.folder-list{
+    padding: 20px 0px;
+    border-bottom: 1px solid #e9e9e9;
+}
+.accordion-button{
+    position: relative;
+    span{
+        padding: 0px 10px;
+        color: #53585C;
+    }
+}
+.accordion-button::after{
+    position: absolute;
+    left: 0;
+    top: 18px;
+}
+.accordion-button:not(.collapsed){
+    background-color: transparent;
+    color: #53585C;
+    box-shadow:none;
+}
+.accordion-button.collapsed::after{
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-folder-plus' viewBox='0 0 16 16'><path d='m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z'/><path d='M13.5 10a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V13h-1.5a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z'/></svg>");
+}
+
+  .accordion-button:not(.collapsed)::after{
+    transform: rotate(0deg);
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-folder-minus' viewBox='0 0 16 16'><path d='m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z'/><path d='M11 11.5a.5.5 0 0 1 .5-.5h4a.5.5 0 1 1 0 1h-4a.5.5 0 0 1-.5-.5z'/></svg>");
+  }
+
+  .folder-type-list{
+    padding-left:30px;
+  }
+
+  .folder-type{
+      padding-bottom: 10px;
+      
+      a{
+        color: #53585C;
+          &:hover{
+              color: #53585C80;
+          }
+      }
+  }
+
+  .folder-del{
+      padding-top: 20px;
+  }
+
+  .folder-del-btn{
+    color:#53585C;
+    i{
+        padding: 0px 10px;
+    }
+    &:hover{
+       color:#53585C80;
+    }
+  }
+
+  //新增資料夾model
+  .addPostFolderList{
+      padding-left: 40px;
+      display: flex;
+      justify-content: center;
+  }
+
+  .addPostFolderList_title{
+      margin: 0px 15px;
+      font-weight: 700;
+      color: #53585C;
+      border-bottom: 4px solid #53585C;
+      cursor: pointer;
+  }
+
+  .addPostFolderList_title.active{
+    color: #1983CF;
+    border-bottom: 4px solid #1983CF;
+  }
+
+  .addPostFolderitem{
+      display: flex;
+      align-items: center;
+      padding: 10px 0px;
+  }
+
+  .addPostFolderitem_title{
+      text-align:center;
+      width: 20%;
+  }
+
+  .addPostFolderitem_form{
+      width: 80%;
+  }

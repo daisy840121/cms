@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <!-- bootstrap -->
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>   
+     <!-- vue -->
+     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+     <!-- CSS-->
+     <link rel="stylesheet" href="./css/main.css">
+</head>
+
+    <body>
+        <header class="header"></header>
+        
+        <div class="wrap">
+            <div class="post_index_wrap">
+                <!-- 左 -->
+                <div class="post_nav">
+                    <a href="./post.html" class="blue_btn"><i class="bi bi-pencil-square"></i>發表文章</a>
+                   <!--  -->
+                    <ul class="post_nav_list">
+                        <li class="post_nav_item">
+                            <a href="">已發表文章
+                                <span class="post_nav_item_num">3</span>
+                            </a>
+                        </li>
+                        <li class="post_nav_item">
+                            <a href="">全部不設分類文章
+                                <span class="post_nav_item_num">0</span>
+                            </a>
+                        </li>
+                        <li class="post_nav_item">
+                            <a href="">草稿文章
+                                <span class="post_nav_item_num">0</span>
+                            </a>
+                        </li>
+                        <li class="post_nav_item">
+                            <a href="">密碼文章
+                                <span class="post_nav_item_num">0</span>
+                            </a>
+                        </li>
+                        <li class="post_nav_item">
+                            <a href="">隱藏文章
+                                <span class="post_nav_item_num">0</span>
+                            </a>
+                        </li>
+                        <li class="post_nav_item">
+                            <a href="">好友文章
+                                <span class="post_nav_item_num">0</span>
+                            </a>
+                        </li>
+                        <li class="post_nav_item">
+                            <a href="">共同作者文章
+                                <span class="post_nav_item_num">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!--  -->
+                    <div class="folder">
+                        
+                        <button type="button" class="btn folder-btn" data-bs-toggle="modal" data-bs-target="#folderType">
+                            <i class="bi bi-plus"></i>分類、資料夾
+                        </button>
+                       <a href="" class="folder-edit-btn">編輯</a>
+                    </div>
+         
+                      <!-- 新增分類、資料夾 -->
+                      <div class="modal fade" id="folderType" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">新增</h5>
+                                <ul class="addPostFolderList">
+                                    <li class="addPostFolderList_title" @click="tag = 0" :class="{active:tag==0}">分類</li>
+                                    <li class="addPostFolderList_title" @click="tag = 1" :class="{active:tag==1}">資料夾</li>
+                                </ul>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                
+                            
+                                <ul  v-show="tag == 0">
+                                    <li class="addPostFolderitem">
+                                        <span class="addPostFolderitem_title">分類名稱</span>
+                                        <span class="addPostFolderitem_form">
+                                            <input type="text" class="form-control" placeholder="請輸入分類名稱" >
+                                        </span>
+                                    </li>
+                                    <li class="addPostFolderitem">
+                                        <span class="addPostFolderitem_title">個人分類</span>
+                                        <span class="addPostFolderitem_form">
+                                            <select class="form-select">
+                                                <option value="" selected>未分類</option>
+                                                <option value="">分類一</option>
+                                            </select>
+                                        </span>
+                                    </li>
+                                    <li class="addPostFolderitem">
+                                        <span class="addPostFolderitem_title">所屬資料夾</span>
+                                        <span class="addPostFolderitem_form">
+                                            <select class="form-select">
+                                                <option value="" selected>未分類</option>
+                                                <option value="">分類一</option>
+                                            </select>
+                                        </span>
+                                    </li>
+                                </ul>
+
+                            <div v-show="tag == 1">
+                                <p>規格</p>
+                            </div>
+
+                            
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+    
+                    <!--  -->
+                    <div class="folder-list">
+                        <div class="accordion accordion-flush" >
+                            <div class="accordion-item">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#targetOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                  <span>住宿類型</span>
+                                </button>
+                              <div id="targetOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" >
+                                <ul class="folder-type-list">
+                                    <li class="folder-type">
+                                        <a href="">商旅 <span class="folder-type-ntm">1</span></a>
+                                    </li>
+                                    <li class="folder-type">
+                                        <a href="">防疫 <span class="folder-type-ntm">12</span></a>
+                                    </li>
+                                </ul>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="accordion accordion-flush">
+                            <div class="accordion-item">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#targetTwo" aria-expanded="false" aria-controls="flush-collapseOne">
+                                  <span>地區</span>
+                                </button>
+                              <div id="targetTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" >
+                                <ul class="folder-type-list">
+                                    <li class="folder-type">
+                                        <a href="">台中 <span class="folder-type-ntm">1</span></a>
+                                    </li>
+                                </ul>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                   <div class="folder-del">
+                        <a href="" class="folder-del-btn"><i class="bi bi-trash"></i>刪除的文章</a>
+                   </div>
+                </div>
+                <!-- 右 -->
+                <div class="post_list_wrap">
+                    <!-- top -->
+                    <ul class="post_selest">
+                        <!-- 設個人分類 -->
+                        <li class="dropdown post_selest_list">
+                            <a class="dropdown-toggle post_selest_item" data-bs-toggle="collapse" href="#personalType"  >
+                                設個人分類
+                            </a>
+                            <ul class="dropdown-menu collapse" id="personalType">
+                                <li class="post_selest_elderBrother collapsed" data-bs-toggle="collapse" href="#personalTypeArea"  >
+                                   <span>地區</span>
+                                   <ul class="post_selest_youngerBrother collapse " id="personalTypeArea">
+                                        <li class="post_selest_youngerBrother_item"><a href="">台中</a></li>
+                                        <li class="post_selest_youngerBrother_item"><a href="">台北</a></li>
+                                   </ul>
+                                </li>
+                                <li class="post_selest_elderBrother collapsed" data-bs-toggle="collapse" href="#personalTypeUsage" >
+                                    <span>住宿類型</span>
+                                    <ul class="post_selest_youngerBrother collapse " id="personalTypeUsage">
+                                         <li class="post_selest_youngerBrother_item"><a href="">防疫</a></li>
+                                         <li class="post_selest_youngerBrother_item"><a href="">商旅</a></li>
+                                    </ul>
+                                 </li>
+                            </ul>
+                        </li>
+                        <!-- 設全站分類 -->
+                        <li class="dropdown post_selest_list">
+                            <a class="dropdown-toggle post_selest_item" data-bs-toggle="collapse" href="#allType"  >
+                                設全站分類
+                            </a>
+                            <ul class="allType_List dropdown-menu collapse" id="allType">
+                                <li class="allType_item" v-for="item in allType" :key="item.id">
+                                    <ul v-for="detail in item.types" :key="detail.id" >
+                                        <li  @click="detail.isClick = !detail.isClick"  :class="detail.isClick == true ? 'isClickStyle' : 'notClickStyle'"> {{detail.type}}</li>
+                                    </ul>
+                                </li>
+                                <li class="allType_List_footer">
+                                    <p class="allType_List_footer_text">
+                                        注意:你原本的設定分類將被
+                                        <span v-for="(i,index) in allType" :key="index">
+                                            <span class="allType_List_check" v-for="(j,key) in i.types" :key="key" v-if="j.isClick == true ">{{j.type}}</span>
+                                        </span>
+                                        取代。
+                                    </p>
+                                    <div class="allType_List_footer_btn">
+                                        <a href="" class="blue_btn">確認送出</a>
+                                    </div>
+                                </li>
+                            </ul> 
+                        </li>
+                        <!-- 設文章狀態 -->
+                        <li class="dropdown post_selest_list">
+                            <a class="dropdown-toggle post_selest_item" data-bs-toggle="collapse" href="#postState"  >
+                                設文章狀態
+                            </a>
+                            <ul class="dropdown-menu collapse" id="postState">
+                                <li class="postState_item"><a href=""><i class="bi bi-file-earmark"></i>草稿</a></li>
+                                <li class="postState_item"><a href=""><i class="bi bi-eye"></i>開放</a></li>
+                                <li class="postState_item"><a href=""><i class="bi bi-key"></i>密碼</a></li>
+                                <li class="postState_item"><a href=""><i class="bi bi-eye-slash"></i>隱藏</a></li>
+                                <li class="postState_item"><a href=""><i class="bi bi-people-fill"></i>好友</a></li>
+                                <li class="postState_item"><a href=""><i class="bi bi-person-plus-fill"></i>共同作者</a></li>
+                            </ul>
+                        </li>
+                        <!-- 更多 -->
+                        <li class="dropdown post_selest_list">
+                            <a class="dropdown-toggle post_selest_item" data-bs-toggle="collapse" href="#more"  >
+                                更多
+                            </a>
+                            <ul class="dropdown-menu collapse" id="more">
+                                <li class="postState_item"><a href="">置頂</a></li>
+                                <li class="postState_item"><a href="">取消置頂</a></li>
+                                <li class="postState_item"><a href="">清空人氣</a></li>
+                            </ul>
+                        </li>
+                        <li class="post_selest_list">
+                            <a class="post_selest_item" href="#"  >
+                                <i class="bi bi-trash" @click="delPost"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- list -->
+                    <table class="table post_list">
+                        <thead>
+                          <tr class="table_post_title">
+                            <th scope="col"><input class="form-check-input" type="checkbox" value="" v-model="selectAllStatus"></th>
+                            <th scope="col">日期</th>
+                            <th scope="col">文章標題</th>
+                            <th scope="col">作者</th>
+                            <th scope="col">全站分類</th>
+                            <th scope="col">狀態</th>
+                            <th scope="col">留言</th>
+                            <th scope="col">人氣</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="(i,index) in postTable" :key="index" class="table_post_item">
+                            <td scope="col"><input class="form-check-input" type="checkbox" value="" v-model="i.isChecked"></td>
+                            <td scope="col">{{i.date}}</td>
+                            <td scope="col">{{i.title}}</td>
+                            <td scope="col">{{i.author}}</td>
+                            <td scope="col">{{i.type}}</td>
+                            <td scope="col" @click="i.isOpen = !i.isOpen">
+                                <i class="bi bi-eye" v-if="i.isOpen == true"></i>
+                                <i class="bi bi-eye-slash" v-else></i>
+                            </td>
+                            <td scope="col">{{i.message}}</td>
+                            <td scope="col">{{i.popular}}</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                    <div class="post_list_footer">
+                        <div class="displayPage">
+                            <span>每頁</span>
+                            <select class="form-select">
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                            </select>
+                            <span>筆</span>
+                        </div>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                              <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                  <span aria-hidden="true">&laquo;</span>
+                                </a>
+                              </li>
+                              <li class="page-item"><a class="page-link" href="#">1</a></li>
+                              <li class="page-item"><a class="page-link" href="#">2</a></li>
+                              <li class="page-item"><a class="page-link" href="#">3</a></li>
+                              <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                  <span aria-hidden="true">&raquo;</span>
+                                </a>
+                              </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer"></footer>
+        <script>
+            new Vue({
+                el: ".wrap",
+                data() {
+                    return {
+                        isOpen:false,
+                        tag:0,
+                        allType:[
+                            {
+                                id:'01',
+                                types:[
+                                    {
+                                        id:'NHI',
+                                        type:'醫療健保',
+                                        isClick:false,
+                                    },
+                                    {
+                                        id:'recipe',
+                                        type:'食譜分享',
+                                        isClick:false,
+                                    },
+                                    {
+                                        id:'diningBrief',
+                                        type:'美味食記',
+                                        isClick:false,
+                                    },
+                                ]
+                            },
+                            {
+                                id:'02',
+                                types:[
+                                    {
+                                        id:'life',
+                                        type:'生活綜合',
+                                        isClick:false,
+                                    },
+                                    {
+                                        id:'psychologicalTest',
+                                        type:'心理測驗',
+                                        isClick:false,
+                                    },
+                                    {
+                                        id:'astrology',
+                                        type:'星座算命',
+                                        isClick:false,
+                                    },
+                                ]
+                            },
+                            {
+                                id:'03',
+                                types:[
+                                    {
+                                        id:'collect',
+                                        type:'收藏嗜好',
+                                        isClick:false,
+                                    },
+                                    {
+                                        id:'photography',
+                                        type:'攝影寫真',
+                                        isClick:true,
+                                    },
+                                    {
+                                        id:'digit',
+                                        type:'數位生活',
+                                        isClick:false,
+                                    },
+                                ]
+                            },
+                            {
+                                id:'04',
+                                types:[
+                                    {
+                                        id:'ACG',
+                                        type:'電玩動漫',
+                                        isClick:false,
+                                    },
+                                    {
+                                        id:'visualDesign',
+                                        type:'視覺設計',
+                                        isClick:true,
+                                    },
+                                    {
+                                        id:'kuso',
+                                        type:'K U S O',
+                                        isClick:false,
+                                    },
+                                ]
+                            },
+                            {
+                                id:'05',
+                                types:[
+                                    {
+                                        id:'sport',
+                                        type:'運動體育',
+                                        isClick:false,
+                                    },
+                                    {
+                                        id:'domesticTourism ',
+                                        type:'國內旅遊',
+                                        isClick:false,
+                                    },
+                                    {
+                                        id:'travelAbroad ',
+                                        type:' 國外旅遊',
+                                        isClick:false,
+                                    },
+                                ]
+                            }
+                        ],
+                        postTable:[
+                            {
+                                id:Math.floor(Date.now()),
+                                date:'2022/04/15',
+                                title:'雀客旅館-台北站前',
+                                author:'林瑋晨',
+                                type:'國內旅遊,生活綜合',
+                                isOpen:true,
+                                message:'公開',
+                                popular:"1203",
+                                isChecked:true
+                            },
+                            {
+                                id:Math.floor(Date.now()),
+                                date:'2022/04/16',
+                                title:'雀客旅館-台北松江',
+                                author:'李思佳',
+                                type:'國內旅遊,生活綜合',
+                                isOpen:false,
+                                message:'不公開',
+                                popular:"4935",
+                                isChecked:false
+                            },
+                        ]
+                    }
+                },
+                //製作Checkbox全選
+                computed: {
+                    isChecked() {
+                        return this.postTable.filter(item => item.isChecked).length
+                    },
+                    selectAllStatus: {
+                        get() {
+                            return this.isChecked > 0 && this.isChecked === this.postTable.length
+                        },
+                        set(val) {
+                            this.postTable = this.postTable.map(item => {
+                            item.isChecked = val
+                            return item
+                            })
+                        }
+                    }
+                },
+                methods: {
+                    //垃圾桶
+                    delPost(key){
+                        this.postTable.splice(key, 1)
+                    }
+                },
+            })
+        </script>
+</body>
+</html>

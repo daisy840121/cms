@@ -1,0 +1,190 @@
+.nav_wrap{
+    height: 63px;
+    background-color: #fff;
+    display: flex;
+}
+.nav_item{
+    padding:22px 30px 22px 0px;
+    cursor: pointer;
+}
+.websiteActive{
+    color: #1983CF;
+    position: relative;
+    &::after{
+        content: '';
+        position: absolute;
+        width: 80px;
+        height: 4px;
+        background-color: #1983CF;
+        top: 85%;  
+        left:35%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.index_content{
+    background-color: #E5E5E5;
+    padding-top:50px;
+    color:  #262626;
+    padding-bottom:66px;
+}
+
+.inner_left{
+    width: 20%;
+}
+.inner_right{
+    width: 80%;
+    display: flex;
+}
+.restaurant_type_slesce{
+    min-width:320px;
+}
+.restaurant_btn{
+   display: flex;
+}
+
+.restaurant_list_text{
+    span{
+        display: block;
+    }
+}
+
+.restaurant_list_title{
+    font-weight: 600;
+    font-size: 24px;
+    color: #000;
+}
+
+
+.restaurant_list{
+    background-color: #fff;
+    padding: 24px;
+}
+
+.restaurant_list_title{
+    font-size: 20px;
+    font-weight: 500;
+    color: #000;
+}
+
+.restaurant_list_item_title{
+    background-color: #F2F2F2;
+}
+
+.restaurant_list_item{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 22px;
+    .form-switch .form-check-input{
+        width: 70px;
+        height: 25px;
+        position: relative;
+        background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' fill='white' class='bi bi-circle-fill' viewBox='0 0 8 8'><circle cx='4' cy='4' r='4'/></svg>")
+    }
+
+    .form-switch .form-check-input:not(:checked){
+        background-color:#B1B1B1;
+    }
+    .form-switch .form-check-input:checked{
+        background-color: #2CA6E0;
+    }
+    .form-switch .form-check-input:not(:checked)::after{
+        content: '已隱藏';
+        color: #fff;
+        font-size: 12px;
+        position: absolute;
+        right: 7px;
+        top:3px;
+    }
+    
+    .form-switch .form-check-input:checked::after{
+        content: '已開啟';
+        color: #fff;
+        font-size: 12px;
+        position: absolute;
+        right: 25px;
+        top:3px;
+    }
+}
+.sort{
+    width: 10%;
+    cursor: pointer;
+}
+.num{
+    width: 10%;
+}
+.numBox{
+    border: 1px solid #262626;
+    width: 30px;
+    height:30px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    cursor: pointer;
+}
+.name{
+    width: 50%;
+}
+.option{
+    width: 10%;
+}
+
+.option.dropdown-toggle::after{
+    margin-left: 25px;
+}
+.edit{
+    width: 10%;
+    text-align: center;
+    a{
+        color: #1983CF;
+    }
+}
+.other{
+    width: 10%;
+    text-align: center;
+    
+    .other_select_item_copybtn{
+        &:hover{
+            background-color: #F0F9FF;
+            color: #1983CF;
+        }
+    }
+    .other_select_item_delbtn{
+        color: #CC0C00;
+        &:hover{
+            background-color: #CC0C0020;
+            color: #CC0C00;
+        }
+    }
+}
+
+
+.addRestaurantTitle_item_select{
+    width:80%;
+    padding-left: 20px;
+    position: relative;
+}
+
+.restaurant_btn{
+    .modal-footer{
+       justify-content: center;
+       a{
+           padding: 8px 50px;
+       }
+    }
+}
+
+
+.select_item{
+    cursor: pointer;
+    text-align: center;
+    padding: 10px 36px;
+}
+
+.select_item_blue{
+    &:hover{
+        background-color: #F0F9FF;
+        color: #1983CF;
+    }
+}

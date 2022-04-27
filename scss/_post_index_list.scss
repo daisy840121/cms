@@ -1,0 +1,211 @@
+.post_selest{
+    padding-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    button{
+        border: 1px solid #53585C;
+        color:#53585C;
+        &:hover{
+        color:#53585C80;
+        border: 1px solid #53585C80;
+        }
+    }
+    .dropdown-menu{
+        padding: 0px;
+    }
+}
+
+.post_selest_list{
+    padding: 0px 15px;
+}
+.post_selest_item{
+    position: relative;
+    @include btn;
+    border: 1px solid #53585C;
+    color:#53585C;
+    &:hover{
+    color:#53585C80;
+    border: 1px solid #53585C80;
+    }
+    
+}
+
+// 設個人分類
+.post_selest_elderBrother{
+    padding: 10px 0px;
+    cursor: pointer;
+}
+
+.post_selest_elderBrother:not(:last-child){
+    border-bottom: 1px solid #e9e9e9;
+}
+.post_selest_elderBrother > span{
+    padding-left: 30px;
+    position: relative;
+    &::after{
+        flex-shrink: 0;
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-left: auto;
+        content: "";
+        position: absolute;
+        left: 5px;
+        background-repeat: no-repeat;
+        background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-folder-plus' viewBox='0 0 16 16'><path d='m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z'/><path d='M13.5 10a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V13h-1.5a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z'/></svg>");
+        background-size: 1.25rem;
+        transition: transform .2s ease-in-out;
+    }
+}
+
+.post_selest_elderBrother.collapsed > span{
+    &::after{
+        background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-folder-plus' viewBox='0 0 16 16'><path d='m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z'/><path d='M13.5 10a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V13h-1.5a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z'/></svg>");
+    }
+}
+
+.post_selest_elderBrother:not(.collapsed) > span {
+    &::after{
+        background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-folder-minus' viewBox='0 0 16 16'><path d='m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z'/><path d='M11 11.5a.5.5 0 0 1 .5-.5h4a.5.5 0 1 1 0 1h-4a.5.5 0 0 1-.5-.5z'/></svg>");
+    }  
+}
+
+.post_selest_youngerBrother_item{
+    padding: 10px 30px;
+    &:hover{
+        background-color: #1983CF70;
+    }
+    a{
+        &:hover{
+            color: #000;
+        }
+    }
+}
+
+// 設定全站分類
+
+.allType_item{
+    ul{
+        li{
+            letter-spacing: 1px;
+            float: right;
+            padding:15px 10px 15px 30px;
+            cursor: pointer;
+            border-bottom: 1px solid #e9e9e9;
+            border-right: 1px solid #e9e9e9;
+        }
+    }
+}
+
+.allType_List.dropdown-menu{
+    min-width:330px;
+    right: 0;
+}
+
+.isClickStyle{
+    position: relative;
+    background-color: #1983CF70;
+    color: #fff;
+    &::after{
+        flex-shrink: 0;
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-left: auto;
+        content: "";
+        position: absolute;
+        left: 5px;
+        background-repeat: no-repeat;
+        background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-check2' viewBox='0 0 16 16'><path d='M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z'/></svg>");
+        background-size: 1.25rem;
+        transition: transform .2s ease-in-out;
+    }
+}
+
+.allType_List_footer{
+    padding:5px;
+    float:left;
+    p{
+        color:#CC0C00;
+    }
+    .allType_List_check{
+        font-weight: 700;
+        padding: 0px 2px;
+    }
+}
+
+
+
+
+.allType_List_footer_btn{
+    padding: 10px 0px;
+    display: flex;
+    justify-content: center;
+}
+
+// 設文章狀態
+
+.bi-key::before{
+        transform: rotate(90deg) !important;
+}
+
+.postState_item{
+    border:1px solid #e9e9e9;
+    i{
+        padding-right: 4px;
+    }
+    a{
+        width: 100%;
+        display: block;
+        padding: 10px;
+        &:hover{
+            background-color: #1983CF70;
+            color: #fff;
+        }
+    }
+}
+
+// 更多
+
+
+//table
+.post_list{
+   margin-top: 50px;
+}
+
+.table_post_title{
+    th{
+        text-align: center;
+    }
+}
+.table_post_item{
+    td{
+        text-align: center;
+    }
+}
+
+//footer
+.post_list_wrap{
+    position: relative;
+}
+.post_list_footer{
+   width: 100%;
+   position: absolute;
+   bottom: 0;
+   display: flex;
+   justify-content: space-between;
+}
+.displayPage{
+    width:150px;
+   display: flex;
+   align-items: center;
+   select{
+       max-width: 80px;
+       margin: 0px 5px;
+   }
+}
+
+
+.post_list_footer{
+    .page-link{
+        color: #53585C;
+    }
+}

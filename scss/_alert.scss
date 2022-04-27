@@ -1,0 +1,27 @@
+.swal-footer{
+    text-align: center;
+}
+
+.swal-button--cancel,.swal-button{
+    letter-spacing: 1px;
+    background-color:transparent;
+    border: 2px solid #1983CF;
+    color: #1983CF;
+  &:hover{
+    background-color:#1983CF !important;
+    border: 2px solid #1983CF;
+    color: #fff;
+  }
+}
+
+.swal-button--danger{
+    letter-spacing: 1px;
+    background-color:transparent;
+    border: 2px solid #CC0C00;
+    color: #CC0C00;
+  &:hover{
+    background-color:#CC0C00 !important;
+    border: 2px solid #CC0C00;
+    color: #fff;
+  }
+}
