@@ -984,7 +984,6 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
 }
 
 .btnArea {
-  width: 100%;
   position: absolute;
   top: 170px;
   right: 90px;
