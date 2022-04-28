@@ -105,6 +105,10 @@
   width: 220px;
 }
 
+.top{
+  top: 0;
+}
+
 .hotelInfoEditMainTextNum{
   position:absolute;
   padding-left: 5px;
@@ -180,6 +184,35 @@
   }
 }
 
-.top{
-  top: 0;
+
+.form-switch .form-check-input{
+  width: 70px;
+  height: 25px;
+  position: relative;
+  background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' fill='white' class='bi bi-circle-fill' viewBox='0 0 8 8'><circle cx='4' cy='4' r='4'/></svg>")
 }
+
+.form-switch .form-check-input:not(:checked){
+  background-color:#B1B1B1;
+}
+.form-switch .form-check-input:checked{
+  background-color: #2CA6E0;
+}
+.form-switch .form-check-input:not(:checked)::after{
+  content: '已隱藏';
+  color: #fff;
+  font-size: 12px;
+  position: absolute;
+  right: 7px;
+  top:3px;
+}
+
+.form-switch .form-check-input:checked::after{
+  content: '已開啟';
+  color: #fff;
+  font-size: 12px;
+  position: absolute;
+  right: 25px;
+  top:3px;
+}
+

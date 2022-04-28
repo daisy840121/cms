@@ -24,22 +24,22 @@
 <body>
     <header class="header">
     </header>
-    <form action="">
-        <div class="wrap hotelInfoWrap">
-            <div class="content nav_wrap">
-                <a href="./index.html" class="nav_item">返回上一頁</a>
-            </div>
-            <div class="wrap index_content">
-                <div class="content">
-                    <p class="classTitle">編輯內容</p>
-                    <div class="">
-                        <ul class="flex">
-                            <li class="nav_item w100px" @click="hotelInfoTabs = 0" :class="{websiteActive:hotelInfoTabs==0}">飯店資訊</li>
-                            <li class="nav_item w100px" @click="hotelInfoTabs = 1" :class="{websiteActive:hotelInfoTabs==1}">房型列表</li>
-                        </ul> 
-                        <div class="restaurant_list mt-20"> 
-                        <!--------------------分類排序-------------------->
-                            <div v-show="hotelInfoTabs == 0">
+    <div class="wrap hotelInfoWrap">
+        <div class="content nav_wrap">
+            <a href="./index.html" class="nav_item">返回上一頁</a>
+        </div>
+        <div class="wrap index_content">
+            <div class="content">
+                <p class="classTitle">編輯內容</p>
+                <div class="">
+                    <ul class="flex">
+                        <li class="nav_item w100px" @click="hotelInfoTabs = 0" :class="{websiteActive:hotelInfoTabs==0}">飯店資訊</li>
+                        <li class="nav_item w100px" @click="hotelInfoTabs = 1" :class="{websiteActive:hotelInfoTabs==1}">房型列表</li>
+                    </ul> 
+                    <div class="mt-20"> 
+                    <!--------------------飯店資訊-------------------->
+                        <div v-show="hotelInfoTabs == 0">
+                            <form action="" class="restaurant_list">
                                 <ul class="inner hotelInfoEditList">
                                     <li class="inner hotelInfoEditItem">
                                         <span class="hotelInfoEditTitle">飯店名稱</span>
@@ -105,7 +105,7 @@
                                                         </svg> 
                                                     </label>           
                                                 </div>
-
+    
                                             </div>
                                             
                                         
@@ -136,32 +136,66 @@
                                         </span>
                                     </li>
                                 </ul>
+                                <div class="sendArea">
+                                    <div class="content flex">
+                                        <a href="" class="blue_btn">儲存</a>
+                                        <a href="" class="blueBorder_btn">取消</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!--------------------房型列表-------------------->
+                        <div v-show="hotelInfoTabs == 1">
+                            <div class="btnArea">
+                                <span class="blueBorder_btn dropdown-toggle" type="button" id="roomTypeIsopen" data-bs-toggle="dropdown" aria-expanded="false">全部</span>
+                                <ul class="dropdown-menu" aria-labelledby="roomTypeIsopen">
+                                    <li class="select_item select_item_blue">全部</li>
+                                    <li class="select_item select_item_blue">已開啟</li>
+                                    <li class="select_item select_item_blue">已隱藏</li>
+                                </ul>
                             </div>
-                            <!--------------------分類編輯-------------------->
-                            <div v-show="hotelInfoTabs == 1">
-                                
-                            </div>
+                            <form action="">
+                                <ul class="roomTypeList" ref="roomTypeSortable">
+                                    <li class="roomTypeItem" v-for="i in roomType" :key="i.id">
+                                        <div class="roomTypeHeader">
+                                            <span>{{i.name}}</span>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch" v-model="i.isOpen">
+                                            </div>
+                                        </div>
+                                        <div class="roomTypeDesc">
+                                            <div class="roomTypeMain">
+                                                <div class="roomTypeImg">
+                                                    <img :src="i.img" alt="">
+                                                </div>
+                                                <div class="roomTypeText" v-html="i.text"></div>
+                                            </div>
+                                            <div class="roomTypePrice"  v-html="i.price"></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="sendArea">
+                                    <div class="content flex">
+                                        <a href="" class="blue_btn">儲存</a>
+                                        <a href="" class="blueBorder_btn">取消</a>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-        <!--------------------root-------------------->
         </div>
+    <!--------------------root-------------------->
+    </div>
 
 
-        <footer class="footer">
-            <div class="content sendArea">
-                <a href="" class="blue_btn">儲存</a>
-                <a href="" class="blueBorder_btn">取消</a>
-            </div>
-        </footer>
-    </form>
     <script>
         new Vue({
             el: ".hotelInfoWrap",
             data() {
                 return {
-                    hotelInfoTabs:0,
+                    hotelInfoTabs:1,
                     hotelNameMax:20,//新增飯店標題字數限制
                     hotelName:'',//新增飯店標題
                     hotelPriceDescMax:50,
@@ -173,7 +207,57 @@
                     preview: null,
                     image: null,
                     preview_list: [],
-                    image_list: []
+                    image_list: [],
+                    roomType:[
+                        {   id:'01',
+                            name:'綠樣客房',
+                            img:'https://ppt.cc/fVd2Gx@.png',
+                            isOpen:true,
+                            text:`• 坪數 : 9坪
+                            • 床型 : 一大床or兩小床
+                            • 設有窗戶
+                            • 衛浴 : 乾溼分離
+                            • 工作空間 : 設有桌子  `,
+                            price:`早鳥 NT$ 3300 /每晚
+                                    房價 NT$ 3600 /每晚`
+                        },
+                        {   id:'02',
+                            name:'水樣客房',
+                            img:'https://ppt.cc/fTiPQx@.png',
+                            isOpen:true,
+                            text:`• 坪數 : 9坪
+                            • 床型 : 一大床or兩小床
+                            • 設有窗戶
+                            • 衛浴 : 乾溼分離
+                            • 工作空間 : 設有桌子  `,
+                            price:`早鳥 NT$ 3300 /每晚
+                                    房價 NT$ 3600 /每晚`
+                        },
+                        {   id:'03',
+                            name:'園樣客房',
+                            img:'https://ppt.cc/fYsuUx@.png',
+                            isOpen:false,
+                            text:`• 坪數 : 9坪
+                            • 床型 : 一大床or兩小床
+                            • 設有窗戶
+                            • 衛浴 : 乾溼分離
+                            • 工作空間 : 設有桌子  `,
+                            price:`早鳥 NT$ 3300 /每晚
+                                    房價 NT$ 3600 /每晚`
+                        },
+                        {   id:'04',
+                            name:'藍樣客房',
+                            img:'https://ppt.cc/fVHYTx@.png',
+                            isOpen:false,
+                            text:`• 坪數 : 9坪
+                            • 床型 : 一大床or兩小床
+                            • 設有窗戶
+                            • 衛浴 : 乾溼分離
+                            • 工作空間 : 設有桌子  `,
+                            price:`早鳥 NT$ 3300 /每晚
+                                    房價 NT$ 3600 /每晚`
+                        },
+                    ]
                 }
             },
             methods: {
@@ -269,6 +353,13 @@
                             document.body.classList.remove('is-open')
                     }});
                 }
+            },
+            mounted(){
+                //清單拖移
+                Sortable.create(this.$refs.roomTypeSortable,{
+                    animation: 1000,
+                    onUpdate: this.sorted,
+                })
             },
         })
     </script>
