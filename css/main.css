@@ -924,9 +924,6 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
   width: 90%;
   display: flex;
   align-items: center;
-}
-
-.hotelInfoEditMain {
   position: relative;
 }
 
@@ -1131,5 +1128,9 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
 .imgBoxList li {
   margin-right: 20px;
   margin-bottom: 20px;
+}
+
+.top {
+  top: 0;
 }
 /*# sourceMappingURL=main.css.map */
