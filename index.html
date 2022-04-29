@@ -316,7 +316,25 @@
                 },
                 //多選刪除
                 multipleChoiceDel(){
-                    this.hotel = this.hotel.filter(item=>item.isCheck == false)
+                    let _this = this;
+                    document.body.classList.add('is-open')
+                    swal({
+                            title:"刪除此飯店?",
+                            icon:"warning",
+                            text:`確定刪除嗎？\n\n注意：\n刪除後，未來欲新增此飯店，\n所有預帶資料即為PMS後台原始資料`,
+                            buttons: ["保留", "刪除此飯店"],
+                            dangerMode: true,
+                        }).then((willDelete)=>{
+                            if (willDelete) {
+                                this.hotel = this.hotel.filter(item=>item.isCheck == false)
+                                swal("你已成功刪除", {
+                                icon: "success",
+                                buttons:'完成'
+                            });
+                        } else{
+                                return;
+                            }
+                        })        
                 },
                 //倒計數title
                 descInput(){
