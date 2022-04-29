@@ -1,5 +1,5 @@
 @mixin btn{
-  width: 120px;
+  min-width: 120px;
   padding: .375rem .75rem;
   border-radius: .25rem;
   display: flex;

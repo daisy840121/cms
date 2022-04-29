@@ -193,7 +193,7 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
 }
 
 .newTodo {
-  width: 120px;
+  min-width: 120px;
   padding: .375rem .75rem;
   border-radius: .25rem;
   display: flex;
@@ -325,7 +325,7 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
 
 .folder-btn, .folder-edit-btn {
   margin: 0px 5px;
-  width: 120px;
+  min-width: 120px;
   padding: .375rem .75rem;
   border-radius: .25rem;
   display: flex;
@@ -473,7 +473,7 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
 
 .post_selest_item {
   position: relative;
-  width: 120px;
+  min-width: 120px;
   padding: .375rem .75rem;
   border-radius: .25rem;
   display: flex;
@@ -1062,7 +1062,7 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
 }
 
 .blue_btn {
-  width: 120px;
+  min-width: 120px;
   padding: .375rem .75rem;
   border-radius: .25rem;
   display: flex;
@@ -1088,7 +1088,7 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
 }
 
 .blueBorder_btn {
-  width: 120px;
+  min-width: 120px;
   padding: .375rem .75rem;
   border-radius: .25rem;
   display: flex;
@@ -1112,7 +1112,7 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
 .delBtn {
   border: 2px solid #CC0C00;
   color: #CC0C00;
-  width: 120px;
+  min-width: 120px;
   padding: .375rem .75rem;
   border-radius: .25rem;
   display: flex;
