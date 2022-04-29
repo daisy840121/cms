@@ -1026,6 +1026,10 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
   background-color: #fff;
 }
 
+.btnArea span::after {
+  margin-top: 10px;
+}
+
 .roomEditBtn:hover {
   color: #000;
 }

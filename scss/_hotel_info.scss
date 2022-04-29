@@ -101,5 +101,8 @@
     justify-content: flex-end;
     span{
         background-color: #fff;
+        &::after{
+            margin-top: 10px;
+        }
     }
 }

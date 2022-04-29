@@ -165,7 +165,7 @@
                     <div class="inner between">
                         <div class="input-group search-area">
                             <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
-                            <input type="text" class="form-control" placeholder="搜尋飯店名稱" v-model="hotelSearch">
+                            <input type="text" class="form-control" placeholder="搜尋飯店名稱" v-model="hotelSearch" @keyup.enter=>
                         </div>
                         <span class="blueBorder_btn" @click="IsCheckBoxFun = !IsCheckBoxFun">多選</span>
                     </div>
@@ -177,9 +177,9 @@
                             <span class="name">飯店名稱</span>
                             <span class="option dropdown-toggle" type="button" id="hotelPlace" data-bs-toggle="dropdown" aria-expanded="false">全部</span>
                             <ul class="dropdown-menu" aria-labelledby="hotelPlace">
-                                <li class="select_item select_item_blue">全部</li>
-                                <li class="select_item select_item_blue">已開啟</li>
-                                <li class="select_item select_item_blue">已隱藏</li>
+                                <li class="select_item select_item_blue" @click="visibility='all'">全部</li>
+                                <li class="select_item select_item_blue" @click="visibility='isOpenTrue'">已開啟</li>
+                                <li class="select_item select_item_blue"  @click="visibility='isOpenFalse'">已隱藏</li>
                             </ul>
                             <span class="edit"></span>
                             <span class="other"></span>
@@ -255,6 +255,7 @@
             el: ".indexWrap",
             data() {
                 return {
+                    visibility:'all',
                     IsCheckBoxFun:false,
                     remnant:20,//新增飯店標題字數限制
                     addRestaurantTitle:'',//新增飯店標題
@@ -437,16 +438,36 @@
                         return count;
                 },
                 //搜尋飯店
-                searchHotelData: function () {
+                searchHotelData() {
                         var search = this.hotelSearch;
                         if (search) {
-                            return this.hotel.filter(function (h) {
-                                return Object.keys(h).some(function (key) {
-                                    return String(h[key]).toLowerCase().indexOf(search) > -1
+                                return this.hotel.filter(function (h) {
+                                    return Object.keys(h).some(function (key) {
+                                        return String(h[key]).toLowerCase().indexOf(search) > -1
+                                    })
                                 })
-                            })
-                        }
-                        return this.hotel;
+                            }
+                        
+                        //@clickSelect
+                        if (this.visibility == 'all') {
+                                return this.hotel;
+                            } else if (this.visibility == 'isOpenTrue') {
+                                var arr = []; //存放未完成內容
+                                this.hotel.forEach(item => {
+                                if (item.isOpen) {
+                                    arr.push(item)
+                                }
+                                })
+                                return arr;
+                            } else if (this.visibility == 'isOpenFalse') {
+                                var arr = [];
+                                this.hotel.forEach(item => {
+                                if (!item.isOpen) {
+                                    arr.push(item)
+                                }
+                                })
+                                return arr;
+                            }                      
                     },
                 //搜尋新增飯店
                 searchAddHotelData:function () {
