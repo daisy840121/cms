@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"
+      integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
+        integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
+        crossorigin="anonymous"></script>
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <!-- Draggable -->
+    <script src="https://www.itxst.com/package/sortable/sortable.min.js"></script>
+    <!-- alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- CSS-->
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <header class="header">
+    </header>
+    <div class="wrap hotelInfoWrap">
+        <div class="content nav_wrap">
+            <a href="./hotel_info.html" class="nav_item">返回上一頁</a>
+        </div>
+        <div class="wrap index_content">
+            <div class="content">
+                <p class="classTitle">編輯房型</p>
+                <div class="roomDetailWrap">
+                    <div class="roombtnArea">
+                        <span class="delBtn" @click="reductionDefault">還原成預設值</span>
+                    </div>
+                    <form action="" class="restaurant_list">
+                        <ul class="inner hotelInfoEditList">
+                            <li class="inner hotelInfoEditItem">
+                                <span class="hotelInfoEditTitle">房型名稱</span>
+                                <span class="hotelInfoEditMain">
+                                    <input type="text" class="form-control" placeholder="請輸入房型名稱，最多二十個字" maxlength="20"  @input="roomNameInput" v-model="roomName">
+                                    <span class="hotelInfoEditMainTextNum">{{roomNameMax}}/20</span>
+                                </span>
+                            </li>
+                            <li class="inner hotelInfoEditItem">
+                                <span class="hotelInfoEditTitle">優惠價格</span>
+                                <span class="hotelInfoEditMain">
+                                    早鳥&emsp;
+                                    <div class="input-group wax-220">
+                                        <span class="input-group-text">NT$</span>
+                                        <input type="text" class="form-control" placeholder="3500">
+                                    </div>         
+                                    &emsp;/&emsp;每晚                        
+                                </span>
+                            </li>
+                            <li class="inner hotelInfoEditItem">
+                                <span class="hotelInfoEditTitle">房型價格</span>
+                                <span class="hotelInfoEditMain">
+                                    房價&emsp;
+                                    <div class="input-group wax-220">
+                                        <span class="input-group-text">NT$</span>
+                                        <input type="text" class="form-control" placeholder="3500">
+                                    </div>         
+                                    &emsp;/&emsp;每晚                        
+                                </span>
+                            </li>
+                            <li class="inner hotelInfoEditItem">
+                                <span class="hotelInfoEditTitle">房型描述</span>
+                                <span class="hotelInfoEditMain">
+                                    <textarea class="form-control bigText" placeholder="" maxlength="500" v-model="roomDesc" @input="roomDescInput()"></textarea>
+                                    <span class="textNum">{{roomDescMax}}/500</span>
+                                </span>
+                            </li>
+                            <li class="inner hotelInfoEditItem">
+                                <span class="hotelInfoEditTitle">詳情照片</span>
+                                <span class="hotelInfoEditMain">
+                                    <div class="imgWrap">
+                                        <ul class="imgBoxList">
+                                            <li v-for="item, index in room_preview_list" :key="index" class="imgBox">
+                                                <img :src="item" />
+                                                <i class="bi bi-x-lg" @click.stop="removeImage(index)"></i>
+                                            </li> 
+                                        </ul>  
+                                        <div class="imgBox">
+                                            <input type="file" accept="image/*" multiple="multiple" @change="previewMultiImage" id="hoteldetalImg" class="file"> 
+                                            <label for="hoteldetalImg">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#2CA6E0" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                </svg> 
+                                            </label>           
+                                        </div>
+                                    </div>
+                                </span>
+                            </li>
+                            <li class="inner hotelInfoEditItem">
+                                <span class="hotelInfoEditTitle"></span>
+                                <span class="hotelInfoEditMain">
+                                    <span class="descBox">
+                                        <span>每間房型至少應上傳 3 張照片</span>
+                                        <span>照片檔案大小限制 10 M</span>
+                                        <span>照片最佳尺寸(3:2) = 1026 X 684 jpg、jpeg</span>
+                                    </span>
+                                </span>
+                            </li>
+                        </ul>
+                        <div class="sendArea">
+                            <div class="content flex">
+                                <a href="" class="blue_btn">儲存</a>
+                                <a href="" class="blueBorder_btn">取消</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <!--------------------root-------------------->
+    </div>
+
+
+    <script>
+        new Vue({
+            el: ".hotelInfoWrap",
+            data() {
+                return {
+                    roomNameMax:20,//新增飯店標題字數限制
+                    roomName:'綠樣客房',//新增飯店標題
+                    roomDesc:`• 坪數 : 9坪
+• 床型 : 一大床or兩小床
+• 設有窗戶
+• 衛浴 : 乾溼分離
+• 工作空間 : 設有桌子`,
+                    roomDescMax:500,
+                    room_preview_list: [],
+                    room_image_list: [],
+                }
+            },
+            methods: {
+                //倒計數
+                roomNameInput(){
+                    var txtVal = this.roomName.length;
+                    this.roomNameMax = 20-txtVal;
+                },
+                roomDescInput(){
+                    var txtVal = this.roomDesc.length;
+                    this.roomDescMax = 500-txtVal;
+                },
+                previewMultiImage(event) {
+                    var input = event.target;
+                    var count = input.files.length;
+                    var index = 0;
+                    if (input.files) {
+                        while(count --) {
+                            var reader = new FileReader();
+                            reader.onload = (e) => {
+                                this.room_preview_list.push(e.target.result);
+                            }
+                            this.room_image_list.push(input.files[index]);
+                            reader.readAsDataURL(input.files[index]);
+                            index ++;
+                        }
+                    }
+            },
+                reset() {
+                    this.room_image_list = [];
+                    this.room_preview_list = [];
+                },
+                removeImage(index){
+                    swal({
+                        title:"刪除",
+                        icon:"warning",
+                        buttons: ["保留", "刪除"],
+                        dangerMode: true,
+                    }).then((willDelete)=>{
+                        if (willDelete) {
+                            this.room_preview_list.splice(index, 1);
+                            swal("你已成功刪除", {
+                            icon: "success",
+                            buttons:'完成'
+                        });
+                            document.body.classList.remove('is-open')
+                    }});
+                },
+                reductionDefault(){
+                    document.body.classList.add('is-open')
+                    swal({
+                        title:"刪除",
+                        text:`確定還原房型為預設資料嗎？\n\n注意：\n還原後，此房型資訊，\n所有資料即為PMS後台原始資料。`,
+                        buttons: ["保留", "刪除此飯店"],
+                        icon:"warning",
+                        buttons: ["維持目前資料", "還原成預設值"],
+                        dangerMode: true,
+                    }).then((willDelete)=>{
+                        if (willDelete) {
+                            this.roomName = ''
+                            this.roomDesc = ''
+                            this.room_preview_list=''
+                            swal("你已成功還原預設值", {
+                            icon: "success",
+                            buttons:'完成'
+                        });
+                            document.body.classList.remove('is-open')
+                    }});
+                },
+                
+            }
+            
+        })
+    </script>
+</body>
+</html>
+

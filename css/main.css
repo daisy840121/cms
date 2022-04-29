@@ -193,10 +193,20 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
 }
 
 .newTodo {
+  width: 120px;
   padding: .375rem .75rem;
   border-radius: .25rem;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 2px;
+  cursor: pointer;
+  margin: 0px 10px;
   width: 100%;
   border: 1px solid #707070;
+}
+
+.newTodo:hover {
+  opacity: 0.7;
 }
 
 .post-tab-submit {
@@ -315,10 +325,20 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
 
 .folder-btn, .folder-edit-btn {
   margin: 0px 5px;
+  width: 120px;
   padding: .375rem .75rem;
   border-radius: .25rem;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 2px;
+  cursor: pointer;
+  margin: 0px 10px;
   border: 1px solid #53585C;
   color: #53585C;
+}
+
+.folder-btn:hover, .folder-edit-btn:hover {
+  opacity: 0.7;
 }
 
 .folder-btn:hover, .folder-edit-btn:hover {
@@ -453,10 +473,20 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
 
 .post_selest_item {
   position: relative;
+  width: 120px;
   padding: .375rem .75rem;
   border-radius: .25rem;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 2px;
+  cursor: pointer;
+  margin: 0px 10px;
   border: 1px solid #53585C;
   color: #53585C;
+}
+
+.post_selest_item:hover {
+  opacity: 0.7;
 }
 
 .post_selest_item:hover {
@@ -659,7 +689,7 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
   background-color: #E5E5E5;
   padding-top: 50px;
   color: #262626;
-  padding-bottom: 66px;
+  padding-bottom: 150px;
 }
 
 .inner_left {
@@ -690,6 +720,7 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
 }
 
 .restaurant_list {
+  max-width: 1070px;
   background-color: #fff;
   padding: 24px;
 }
@@ -995,6 +1026,26 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
   background-color: #fff;
 }
 
+.roomEditBtn:hover {
+  color: #000;
+}
+
+.roombtnArea {
+  position: absolute;
+  top: 115px;
+  right: 103px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.roomDetailWrap {
+  padding-top: 30px;
+}
+
+.relative {
+  position: relative;
+}
+
 .title {
   font-size: 20px;
   line-height: 28px;
@@ -1011,12 +1062,21 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
 }
 
 .blue_btn {
+  width: 120px;
   padding: .375rem .75rem;
   border-radius: .25rem;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 2px;
+  cursor: pointer;
+  margin: 0px 10px;
   background-color: #1983CF;
   color: #fff;
-  letter-spacing: 2px;
   border: 2px solid #1983CF;
+}
+
+.blue_btn:hover {
+  opacity: 0.7;
 }
 
 .blue_btn i {
@@ -1025,22 +1085,49 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
 
 .blue_btn:hover {
   color: #fff;
-  opacity: 0.8;
 }
 
 .blueBorder_btn {
-  margin: 0px 10px;
+  width: 120px;
   padding: .375rem .75rem;
   border-radius: .25rem;
-  display: block;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 2px;
+  cursor: pointer;
+  margin: 0px 10px;
   border: 2px solid #1983CF;
   color: #1983CF;
 }
 
 .blueBorder_btn:hover {
+  opacity: 0.7;
+}
+
+.blueBorder_btn:hover {
   border: 2px solid #1983CF;
   color: #1983CF;
+}
+
+.delBtn {
+  border: 2px solid #CC0C00;
+  color: #CC0C00;
+  width: 120px;
+  padding: .375rem .75rem;
+  border-radius: .25rem;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 2px;
+  cursor: pointer;
+  margin: 0px 10px;
+}
+
+.delBtn:hover {
   opacity: 0.7;
+}
+
+.delBtn:hover {
+  color: #CC0C00;
 }
 
 .inner {
@@ -1169,6 +1256,7 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
 .imgBoxList {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .imgBoxList li {
@@ -1176,7 +1264,7 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
   margin-bottom: 20px;
 }
 
-.form-switch .form-check-input {
+.form-switch .form-check-input:focus, .form-switch .form-check-input {
   width: 70px;
   height: 25px;
   position: relative;

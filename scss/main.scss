@@ -11,6 +11,11 @@
 @import "./addhotelmodal";
 @import "./classTitle";
 @import "./hotel_info";
+@import "./roomEdit";
+
+.relative{
+  position: relative;
+}
 
 .title{
     font-size: 20px;
@@ -19,7 +24,6 @@
     letter-spacing: 2px;
     color: #212529;
 }
-
 
 .subTitle{
   font-weight: 400;
@@ -32,31 +36,34 @@
   @include btn;
   background-color:#1983CF;
   color: #fff;
-  letter-spacing: 2px;
   border: 2px solid #1983CF;
   i{
       padding-right: 10px;
   }
   &:hover{
       color:#fff;
-      opacity: 0.8;
   }
 }
 
 
 .blueBorder_btn{
-  margin: 0px 10px;
   @include btn;
-  display: block;
   border: 2px solid #1983CF;
   color: #1983CF;
   &:hover{
       border: 2px solid #1983CF;
       color: #1983CF;
-      opacity: 0.7;
   }
 }
 
+.delBtn{
+  border: 2px solid #CC0C00;
+  color: #CC0C00;
+  @include btn;
+  &:hover{
+    color: #CC0C00;
+}
+}
 
 .inner{
   width: 100%;
@@ -178,14 +185,14 @@
 .imgBoxList{
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   li{
     margin-right: 20px;
     margin-bottom: 20px;
   }
 }
 
-
-.form-switch .form-check-input{
+.form-switch .form-check-input:focus,.form-switch .form-check-input{
   width: 70px;
   height: 25px;
   position: relative;

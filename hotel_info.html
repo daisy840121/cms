@@ -156,22 +156,24 @@
                             </div>
                             <form action="">
                                 <ul class="roomTypeList" ref="roomTypeSortable">
-                                    <li class="roomTypeItem" v-for="i in roomType" :key="i.id">
-                                        <div class="roomTypeHeader">
-                                            <span>{{i.name}}</span>
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" role="switch" v-model="i.isOpen">
-                                            </div>
-                                        </div>
-                                        <div class="roomTypeDesc">
-                                            <div class="roomTypeMain">
-                                                <div class="roomTypeImg">
-                                                    <img :src="i.img" alt="">
+                                    <li class="roomTypeItem" v-for="i,index in roomType" :key="i.id">
+                                        <a href="./room_edit.html" class="roomEditBtn">
+                                            <div class="roomTypeHeader">
+                                                <span>{{i.name}}</span>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" role="switch" v-model="i.isOpen"  @change="changeIsOpen(index)" >
                                                 </div>
-                                                <div class="roomTypeText" v-html="i.text"></div>
                                             </div>
-                                            <div class="roomTypePrice"  v-html="i.price"></div>
-                                        </div>
+                                            <div class="roomTypeDesc">
+                                                <div class="roomTypeMain">
+                                                    <div class="roomTypeImg">
+                                                        <img :src="i.img" alt="">
+                                                    </div>
+                                                    <div class="roomTypeText" v-html="i.text"></div>
+                                                </div>
+                                                <div class="roomTypePrice"  v-html="i.price"></div>
+                                            </div>
+                                        </a>
                                     </li>
                                 </ul>
                                 <div class="sendArea">
@@ -338,6 +340,7 @@
                     }});
                 },
                 removeImage(index){
+                    document.body.classList.add('is-open')
                     swal({
                         title:"刪除",
                         icon:"warning",
@@ -352,7 +355,40 @@
                         });
                             document.body.classList.remove('is-open')
                     }});
-                }
+                },
+                changeIsOpen(index){
+                    document.body.classList.add('is-open')
+                    let hotelName = this.roomType[index].name;
+                    if(this.roomType[index].isOpen === false){
+                        swal({
+                            title:"隱藏此飯店?",
+                            icon:"warning",
+                            text:`確定隱藏〖 ${hotelName}〗嗎？\n\n注意：\n此飯店所有資訊將不會在前台顯示。`,
+                            buttons: ["保留", "隱藏此飯店"],
+                            dangerMode: true,
+                        }).then((willDelete)=>{
+                            if (willDelete) {
+                                this.roomType[index].isOpen = false;
+                                swal("你已成功隱藏", {
+                                icon: "success",
+                                buttons:'完成'
+                            });
+                        }
+                            else{
+                                this.roomType[index].isOpen = true;
+                            }
+                            document.body.classList.remove('is-open')
+                        }
+                        );
+                    }else{
+                        swal("你已開啟飯店", {
+                                icon: "success",
+                                buttons:'完成'
+                        });
+                            document.body.classList.remove('is-open')
+                    }
+                
+                },
             },
             mounted(){
                 //清單拖移

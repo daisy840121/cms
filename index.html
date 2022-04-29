@@ -26,7 +26,7 @@
 <body>
     <header class="header">
     </header>
-    <div class="wrap indexWrap">
+    <div class="wrap indexWrap relative">
         <!--------------------選擇飯店-------------------->
         <ul class="content nav_wrap">
             <li class="nav_item" @click="website = 0" :class="{websiteActive:website==0}">飯店總覽</li>
@@ -162,11 +162,12 @@
                         <span class="restaurant_list_title">飯店列表</span>
                         <span>已開啟共 {{hotelIsOpenLength}} 間</span>
                     </div>
-                    <div class="inner">
+                    <div class="inner between">
                         <div class="input-group search-area">
                             <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
                             <input type="text" class="form-control" placeholder="搜尋飯店名稱" v-model="hotelSearch">
                         </div>
+                        <span class="blueBorder_btn" @click="IsCheckBoxFun = !IsCheckBoxFun">多選</span>
                     </div>
                     <ul class="inner">
                         <!--------------------列表標題-------------------->
@@ -185,8 +186,9 @@
                         </li>
                         <!--------------------列表內容-------------------->
                         <ul class="inner" ref="sortable" id="sortableList">
-                            <li class="restaurant_list_item" v-for="(li,index) in searchHotelData" :key="li.id" :data-id="li.id">
-                                <span class="sort move"><img src="./img/icon-24-sort.svg" alt=""></span>
+                            <li class="restaurant_list_item relative" v-for="(li,index) in searchHotelData" :key="li.id" :data-id="li.id">
+                                <span class="sort move" v-if="!IsCheckBoxFun"><img src="./img/icon-24-sort.svg" alt=""></span>
+                                <span v-else class="sort"><input class="form-check-input" type="checkbox" value="" v-model="li.isCheck"></span>
                                 <span class="num"><span class="numBox" >{{li.index+1}}</span></span>
                                 <span class="name">{{li.name}}</span>
                                 <span class="option">
@@ -207,7 +209,18 @@
                             </li>
                         </ul>
                     </ul>
-                </div>
+                    </div>
+                    <div class="sendArea">
+                        <div class="content flex" v-if="!IsCheckBoxFun">
+                            <span class="blue_btn">儲存</span>
+                            <span class="blueBorder_btn">取消</span>
+                        </div>
+                        <div class="content flex" v-else>
+                            <span class="blueBorder_btn">新增至</span>
+                            <span class="delBtn" @click.stop="multipleChoiceDel()">刪除</span>
+                            <span class="delBtn" @click.stop="multipleChoiceNotIsOpen()">隱藏</span>
+                        </div>
+                    </div>
                 <!--------------------飯店列表清單結束-------------------->
             </div>
             <!--------------------14天飯店-------------------->
@@ -237,15 +250,12 @@
         </div>
     <!--------------------root-------------------->
     </div>
-
-
-    <footer class="footer"></footer>
-
     <script>
         new Vue({
             el: ".indexWrap",
             data() {
                 return {
+                    IsCheckBoxFun:false,
                     remnant:20,//新增飯店標題字數限制
                     addRestaurantTitle:'',//新增飯店標題
                     website: 0,//選擇飯店頁面
@@ -257,9 +267,9 @@
                     ],
                     hotelSearch:'',//飯店搜尋功能
                     hotel:[//飯店列表
-                        {id:'0',name:'有園飯店-台北中山',isOpen:false,index:0},
-                        {id:'1',name:'台北防疫旅館 [A 館]',isOpen:true,index:1},
-                        {id:'2',name:'雀客旅館-台北車站',isOpen:true,index:2},
+                        {id:'0',name:'有園飯店-台北中山',isOpen:false,index:0,isCheck:false},
+                        {id:'1',name:'台北防疫旅館 [A 館]',isOpen:true,index:1,isCheck:true},
+                        {id:'2',name:'雀客旅館-台北車站',isOpen:true,index:2,isCheck:false},
                     ]
                 }
             },
@@ -272,6 +282,42 @@
                 })
             },
             methods: {
+                //多選隱藏
+                multipleChoiceNotIsOpen(){
+                    let _this = this;
+                    document.body.classList.add('is-open')
+                    swal({
+                            title:"隱藏此飯店?",
+                            icon:"warning",
+                            text:`確定隱藏嗎？\n\n注意：\n此飯店所有資訊將不會在前台顯示。`,
+                            buttons: ["保留", "隱藏此飯店"],
+                            dangerMode: true,
+                        }).then((willDelete)=>{
+                            if (willDelete) {
+                               _this.hotel.forEach(i=>{
+                                  if(i.isCheck){
+                                    return i.isOpen= false
+                                  }
+                                   }
+                               )
+                                swal("你已成功隱藏", {
+                                icon: "success",
+                                buttons:'完成'
+                            });
+                        } else{
+                            _this.hotel.forEach(i=>{
+                                if(i.isCheck){
+                                    return i.isOpen = true
+                                  }
+                               })
+                            }
+                        })
+                          
+                },
+                //多選刪除
+                multipleChoiceDel(){
+                    this.hotel = this.hotel.filter(item=>item.isCheck == false)
+                },
                 //倒計數title
                 descInput(){
                     var txtVal = this.addRestaurantTitle.length;
@@ -350,7 +396,7 @@
                             document.body.classList.remove('is-open')
                     }
                 
-                }
+                },
             },
             computed:{
                 //計算出公開有幾間

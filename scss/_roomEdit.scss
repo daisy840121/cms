@@ -1,0 +1,17 @@
+.roomEditBtn{
+    &:hover{
+        color: #000;
+    }
+}
+
+.roombtnArea{
+    position: absolute;
+    top:115px;
+    right:103px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.roomDetailWrap{
+    padding-top: 30px;
+}
