@@ -19,6 +19,8 @@
     <script src="https://www.itxst.com/package/sortable/sortable.min.js"></script>
     <!-- alert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- CSS-->
     <link rel="stylesheet" href="./css/main.css">
 </head>
@@ -202,9 +204,58 @@
                                         <i class="bi bi-three-dots-vertical"></i>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li class="select_item select_item_blue" @click="copy(index)">複製</li>
+                                        <li class="select_item select_item_blue"  data-bs-toggle="modal" data-bs-target="#moveModel">移動</li>
+                                        <li class="select_item select_item_blue"  data-bs-toggle="modal" data-bs-target="#copyModel">複製</li>
                                         <li class="select_item other_select_item_delbtn" @click="del(index)">刪除</li>                          
                                     </ul>
+                                    <!-- 複製 -->
+                                    <div class="modal fade" id="copyModel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="copyModelLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="copyModelLabel">複製到以下分類：</h5>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                              <p class="title textLeft">其他</p>
+                                              <div class="selectBtn">
+                                                    <span v-for="i in selectBtnOther" @click="toggleStyle">{{i.name}}</span>
+                                              </div>
+                                              <p class="title textLeft">地區</p>
+                                              <div class="selectBtn">
+                                                    <span v-for="i in selectBtnArea" @click="toggleStyle">{{i.name}}</span>
+                                              </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="" class="blue_btn">確定</a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <!-- 移動 -->
+                                     <div class="modal fade" id="moveModel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="moveModelLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="moveModelLabel">移動到以下分類：</h5>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                              <p class="title textLeft">其他</p>
+                                              <div class="selectBtn">
+                                                    <span v-for="i in selectBtnOther" @click="toggleStyle">{{i.name}}</span>
+                                              </div>
+                                              <p class="title textLeft">地區</p>
+                                              <div class="selectBtn">
+                                                    <span v-for="i in selectBtnArea" @click="toggleStyle">{{i.name}}</span>
+                                              </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="" class="blue_btn">確定</a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
                                 </span>
                             </li>
                         </ul>
@@ -216,11 +267,43 @@
                             <span class="blueBorder_btn">取消</span>
                         </div>
                         <div class="content flex" v-else>
-                            <span class="blueBorder_btn">新增至</span>
+                            <span class="blueBorder_btn" data-bs-toggle="modal" data-bs-target="#addModal">新增至</span>
                             <span class="delBtn" @click.stop="multipleChoiceDel()">刪除</span>
                             <span class="delBtn" @click.stop="multipleChoiceNotIsOpen()">隱藏</span>
                         </div>
                     </div>
+                    <!-- 新增至 -->
+                    <div class="modal fade" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="addModalLabel">新增飯店到：</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="inner">
+                                    <span>行銷網站：</span>
+                                    <span class="restaurant_type_slesce">
+                                        <select class="form-select">
+                                            <option value="" selected>14 holidays</option>
+                                        </select>
+                                    </span>
+                                </div>
+                                <div class="inner">
+                                    <span>分類標題：</span>
+                                    <span class="restaurant_type_slesce">
+                                        <select class="form-select">
+                                            <option value="" selected>台北防疫旅館首選</option>
+                                        </select>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="" class="blue_btn" @click.prevent="addModalInfo">確定</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                 <!--------------------飯店列表清單結束-------------------->
             </div>
             <!--------------------14天飯店-------------------->
@@ -271,7 +354,22 @@
                         {id:'0',name:'有園飯店-台北中山',isOpen:false,index:0,isCheck:false},
                         {id:'1',name:'台北防疫旅館 [A 館]',isOpen:true,index:1,isCheck:true},
                         {id:'2',name:'雀客旅館-台北車站',isOpen:true,index:2,isCheck:false},
-                    ]
+                    ],
+                    selectBtnOther:[//複製按鈕
+                        {id:'0',name:'tourbobo專屬房源'},
+                        {id:'1',name:'奢華星級專區'},
+                        {id:'2',name:'熱銷首選專區'},
+                        {id:'3',name:'快樂小資專區'},
+                    ],
+                    selectBtnArea:[//複製按鈕
+                        {id:'0',name:'新北防疫旅館首選'},
+                        {id:'1',name:'桃園防疫旅館首選'},
+                        {id:'2',name:'新竹防疫旅館首選'},
+                        {id:'3',name:'台中防疫旅館首選'},
+                        {id:'4',name:'台南防疫旅館首選'},
+                        {id:'5',name:'屏東防疫旅館首選'},
+                    ],
+
                 }
             },
             mounted(){
@@ -283,6 +381,18 @@
                 })
             },
             methods: {
+                toggleStyle(event){
+                    event.target.classList.toggle("togglestyle");
+                },
+                addModalInfo(){
+                    $('#addModal').modal('hide')
+                    swal({
+                        icon: "success",
+                        title:"飯店已使用至以下網站：",
+                        text:`14 holidays\n防疫旅行家\ntourbobo行銷頁\n`,
+                        buttons:'完成'
+                    });
+                },
                 //多選隱藏
                 multipleChoiceNotIsOpen(){
                     let _this = this;

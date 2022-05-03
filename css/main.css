@@ -826,6 +826,27 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
   color: #1983CF;
 }
 
+.selectBtn {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.selectBtn span {
+  min-width: 180px;
+  padding: 10px 20px;
+  border: 1px solid #262626;
+  margin-right: 24px;
+  margin-bottom: 24px;
+  border-radius: 0.25rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.selectBtn .togglestyle {
+  border: 1px solid #1983CF;
+  color: #1983CF;
+}
+
 .swal-footer {
   text-align: center;
 }
@@ -1181,6 +1202,10 @@ textarea:hover, textarea:focus, input:hover, input:focus, select:hover, select:f
 
 .top {
   top: 0;
+}
+
+.textLeft {
+  text-align: left;
 }
 
 .hotelInfoEditMainTextNum {

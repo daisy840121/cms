@@ -160,3 +160,24 @@
         color: #1983CF;
     }
 }
+
+
+//複製按鈕
+.selectBtn{
+    display: flex;
+    flex-wrap: wrap;
+    span{
+        min-width: 180px;
+        padding: 10px 20px;
+        border: 1px solid #262626;
+        margin-right: 24px;
+        margin-bottom: 24px;
+        border-radius: 0.25rem;
+        letter-spacing: 1px;
+        cursor: pointer;
+    }
+    .togglestyle{
+        border: 1px solid #1983CF;
+        color:#1983CF;
+    }
+}
